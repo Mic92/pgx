@@ -458,6 +458,19 @@ func TestParseURI(t *testing.T) {
 				},
 			},
 		},
+		{
+			url: "postgres:///foo?path=/tmp",
+			connParams: pgx.ConnConfig{
+				Host:     "/tmp",
+				Database: "foo",
+				TLSConfig: &tls.Config{
+					InsecureSkipVerify: true,
+				},
+				UseFallbackTLS:    true,
+				FallbackTLSConfig: nil,
+				RuntimeParams:     map[string]string{},
+			},
+		},
 	}
 
 	for i, tt := range tests {
